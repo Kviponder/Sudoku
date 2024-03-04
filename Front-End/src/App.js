@@ -1,22 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const testInput = [
+    [-1, 5, -1, 9, -1, -1, -1, -1, -1],
+    [8, -1, -1, -1, 4, -1, 3, -1, 7],
+    [-1, -1, -1, 2, 8, -1, 1, 9, -1],
+    [5, 3, 8, 6, -1, 7, 9, 4, -1],
+    [-1, 2, -1, 3, -1, 1, -1, -1, -1],
+    [1, -1, 9, 8, -1, 4, 6, 2, 3],
+    [19, -1, 7, 4, -1, -1, -1, -1, -1],
+    [-1, 4, 5, -1, -1, -1, 2, -1, 9],
+    [-1, -1, -1, -1, 3, -1, -1, 7, -1],
+  ];
+
+  const [sudoBoard, setBoard] = useState(testInput);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 className="header__title">sudoku!</h1>
+        <table className="board">
+          <tbody>
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
+              return (
+                <tr key={rIndex}>
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
+                    return (
+                      <td key={rIndex + cIndex}>
+                        <input
+                          className="board__cell"
+                          type="number"
+                          min={1}
+                          max={9}
+                        />
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </header>
     </div>
   );
