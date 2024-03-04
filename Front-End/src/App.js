@@ -21,6 +21,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1 className="header__title">sudoku!</h1>
+        <div className="header__container">
+          <p className="header__score">Score: 000</p>
+          <div className="header__counter">Time: 0:00</div>
+        </div>
         <table className="board">
           <tbody>
             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((row, rIndex) => {
@@ -29,12 +33,7 @@ function App() {
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
                     return (
                       <td key={rIndex + cIndex}>
-                        <input
-                          className="board__cell"
-                          type="number"
-                          min={1}
-                          max={9}
-                        />
+                        <input className="board__cell" min={1} max={9} />
                       </td>
                     );
                   })}
