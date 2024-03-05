@@ -10,17 +10,21 @@ function App() {
     [5, 3, 8, 6, -1, 7, 9, 4, -1],
     [-1, 2, -1, 3, -1, 1, -1, -1, -1],
     [1, -1, 9, 8, -1, 4, 6, 2, 3],
-    [19, -1, 7, 4, -1, -1, -1, -1, -1],
+    [9, -1, 7, 4, -1, -1, -1, -1, -1],
     [-1, 4, 5, -1, -1, -1, 2, -1, 9],
     [-1, -1, -1, -1, 3, -1, -1, 7, -1],
   ];
 
   const [sudoBoard, setBoard] = useState(testInput);
 
+  // const onInputChange(e, row, col) => {
+  //   const value = parseInt(e.target.value) || -1;
+  // }
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="header__title">sudoku!</h1>
+        <h1 className="header__title">Sudoku!</h1>
         <div className="header__container">
           <p className="header__score">Score: 000</p>
           <div className="header__counter">Time: 0:00</div>
@@ -33,7 +37,17 @@ function App() {
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((col, cIndex) => {
                     return (
                       <td key={rIndex + cIndex}>
-                        <input className="board__cell" min={1} max={9} />
+                        <input
+                          value={
+                            sudoBoard[row][col] === -1
+                              ? ""
+                              : sudoBoard[row][col]
+                          }
+                          // onClick={(e) => onInputChange(e, row, col)}
+                          className="board__cell"
+                          min={1}
+                          max={9}
+                        />
                       </td>
                     );
                   })}

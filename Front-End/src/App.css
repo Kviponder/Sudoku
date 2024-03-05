@@ -9,7 +9,8 @@
 
 .header__title {
   margin: 0;
-  padding: 10px 0;
+  padding: 40px 0;
+  font-size: 40px;
 }
 
 .header__container {
@@ -21,6 +22,7 @@
   align-items: center;
   gap: 20px;
   border: 1px solid #000;
+  border-radius: 4px;
 }
 
 .header__score {
