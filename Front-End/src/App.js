@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const testInput = [
@@ -16,10 +15,33 @@ function App() {
   ];
 
   const [sudoBoard, setBoard] = useState(testInput);
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(true);
 
-  // const onInputChange(e, row, col) => {
-  //   const value = parseInt(e.target.value) || -1;
-  // }
+  function makeDeepCopy(arr) {
+    return JSON.parse(JSON.stringify(arr));
+  }
+
+  function onInputChange(e, row, col) {
+    let value = parseInt(e.target.value) || -1,
+      grid = makeDeepCopy(sudoBoard);
+    if (value === -1 || (value >= 1 && value <= 9)) {
+      grid[row][col] = value;
+    }
+    setBoard(grid);
+  }
+
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else if (!running) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
 
   return (
     <div className="App">
@@ -27,7 +49,11 @@ function App() {
         <h1 className="header__title">Sudoku!</h1>
         <div className="header__container">
           <p className="header__score">Score: 000</p>
-          <div className="header__counter">Time: 0:00</div>
+          <div className="header__counter">
+            Time:
+            <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+            <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+          </div>
         </div>
         <table className="board">
           <tbody>
@@ -43,10 +69,9 @@ function App() {
                               ? ""
                               : sudoBoard[row][col]
                           }
-                          // onClick={(e) => onInputChange(e, row, col)}
+                          onChange={(e) => onInputChange(e, row, col)}
                           className="board__cell"
-                          min={1}
-                          max={9}
+                          disabled={sudoBoard[row][col] !== -1}
                         />
                       </td>
                     );
