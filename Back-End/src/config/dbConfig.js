@@ -10,4 +10,4 @@ const pool = new Pool({
 });
 module.exports = pool;
 
-console.log("dbConfig.js");
+console.log("dbConfig.js + test commit");
