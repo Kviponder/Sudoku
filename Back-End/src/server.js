@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const pool = require("./config/dbConfig");
+const pool = require("./config/dbConfig.js");
 
 //Import Routes
-const userRoutes = require("./routes/userRoutes.js");
+const routes = require("./routes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,7 +15,7 @@ app.use(express.json()); // Parse incoming requests data
 app.use(express.urlencoded({ extended: true }));
 
 //Routes setup
-app.use("/api/users", userRoutes);
+app.use("/api/users", routes.userRoutes);
 
 // Catch-all route for testing the server is up by sending a message when the server is running
 app.get("/", (req, res) => {
