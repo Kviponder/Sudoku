@@ -38,7 +38,7 @@
 }
 
 .board {
-  margin: 100px auto;
+  margin: 100px auto 10px;
   padding: 0;
   width: 510px;
   display: flex;
@@ -70,4 +70,26 @@
 
 .board__cell:disabled {
   background-color: #f8fae5;
+}
+
+.button__container {
+  margin: auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  gap: 20px;
+}
+
+.button {
+  margin: 0;
+  width: 150px;
+  height: 50px;
+  font-size: 24px;
+  font-family: "Trebuchet MS";
+  color: #fff;
+  background-color: #7e2442;
+  border: none;
+  border-radius: 10px;
 }
