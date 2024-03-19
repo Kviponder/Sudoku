@@ -31,7 +31,15 @@ function App() {
     setBoard(grid);
   }
 
-  function checkBoard() {
+  function pauseGame() {
+    console.log("check");
+  }
+
+  function solveBoard() {
+    console.log("check");
+  }
+
+  function newGame() {
     console.log("check");
   }
 
@@ -85,13 +93,13 @@ function App() {
         </tbody>
       </table>
       <div className="button__container">
-        <button className="button" onClick={checkBoard}>
+        <button className="button" onClick={pauseGame}>
           Pause
         </button>
-        <button className="button" onClick={checkBoard}>
+        <button className="button" onClick={solveBoard}>
           Solve
         </button>
-        <button className="button" onClick={checkBoard}>
+        <button className="button" onClick={newGame}>
           New
         </button>
       </div>
