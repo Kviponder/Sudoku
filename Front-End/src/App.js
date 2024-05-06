@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const testInput = [
+  const initial = [
     [-1, 5, -1, 9, -1, -1, -1, -1, -1],
     [8, -1, -1, -1, 4, -1, 3, -1, 7],
     [-1, -1, -1, 2, 8, -1, 1, 9, -1],
@@ -14,7 +14,7 @@ function App() {
     [-1, -1, -1, -1, 3, -1, -1, 7, -1],
   ];
 
-  const [sudoBoard, setBoard] = useState(testInput);
+  const [sudoBoard, setBoard] = useState(makeDeepCopy(initial));
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(true);
 
@@ -31,9 +31,13 @@ function App() {
     setBoard(grid);
   }
 
-  function pauseGame() {
-    console.log("check");
-  }
+  const pauseGame = () => {
+    if (running) {
+      setRunning(false);
+    } else {
+      setRunning(true);
+    }
+  };
 
   function solveBoard() {
     console.log("check");
