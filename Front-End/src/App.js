@@ -34,13 +34,47 @@ function App() {
   const pauseGame = () => {
     if (running) {
       setRunning(false);
-    } else {
-      setRunning(true);
+      return;
     }
+    setRunning(true);
   };
 
+  function checkRow(grid, row, num) {
+    return grid[row.indexOf(num) === -1];
+  }
+
+  function checkCol(grid, col, num) {
+    return grid.map((row) => row[col].indexOf(num) === -1);
+  }
+
+  function checkBox(grid, row, col, num) {
+    let boxArr = [],
+      rowStart = row - (row % 3),
+      colStart = col - (col % 3);
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        boxArr.push(grid[rowStart + i][colStart + j]);
+      }
+    }
+    return boxArr.indexOf(num === -1);
+  }
+
+  function checkValid(grid, row, col, num) {
+    if (checkRow(grid, row, num) && checkCol(grid, col, num) && checkBox()) {
+      return true;
+    }
+    return false;
+  }
+
+  function solver(grid, row, col) {
+    for (let num = 1; num <= 9; num++)
+      if (checkValid(grid, row, col, num)) {
+        console.log("wow");
+      }
+  }
+
   function solveBoard() {
-    console.log("check");
+    let sudoku = makeDeepCopy(initial);
   }
 
   function newGame() {
