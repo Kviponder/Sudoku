@@ -105,7 +105,8 @@ function App() {
   }
 
   function newGame() {
-    console.log("check");
+    let sudoku = makeDeepCopy(initial);
+    setBoard(sudoku);
   }
 
   useEffect(() => {
