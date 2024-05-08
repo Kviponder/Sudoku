@@ -40,11 +40,11 @@ function App() {
   };
 
   function checkRow(grid, row, num) {
-    return grid[row.indexOf(num) === -1];
+    return grid[row].indexOf(num) === -1;
   }
 
   function checkCol(grid, col, num) {
-    return grid.map((row) => row[col].indexOf(num) === -1);
+    return grid.map((row) => row[col]).indexOf(num) === -1;
   }
 
   function checkBox(grid, row, col, num) {
@@ -60,21 +60,48 @@ function App() {
   }
 
   function checkValid(grid, row, col, num) {
-    if (checkRow(grid, row, num) && checkCol(grid, col, num) && checkBox()) {
+    if (
+      checkRow(grid, row, num) &&
+      checkCol(grid, col, num) &&
+      checkBox(grid, row, col, num)
+    ) {
       return true;
     }
     return false;
   }
 
-  function solver(grid, row, col) {
-    for (let num = 1; num <= 9; num++)
-      if (checkValid(grid, row, col, num)) {
-        console.log("wow");
+  function getNext(row, col) {
+    return col !== 8 ? [row, col + 1] : row != 8 ? [row + 1, 0] : [0, 0];
+  }
+
+  function solver(grid, row = 0, col = 0) {
+    if (grid[row][col] !== -1) {
+      let isLast = row >= 8 && col >= 8;
+      if (!isLast) {
+        let [newRow, newCol] = getNext(row, col);
+        return solver(grid, newRow, newCol);
       }
+    }
+    for (let num = 1; num <= 9; num++) {
+      if (checkValid(grid, row, col, num)) {
+        grid[row][col] = num;
+        let [newRow, newCol] = getNext(row, col);
+        if (!newRow && !newCol) {
+          return true;
+        }
+        if (solver(grid, newRow, newCol)) {
+          return true;
+        }
+      }
+    }
+    grid[row][col] = -1;
+    return false;
   }
 
   function solveBoard() {
     let sudoku = makeDeepCopy(initial);
+    solver(sudoku);
+    setBoard(sudoku);
   }
 
   function newGame() {
