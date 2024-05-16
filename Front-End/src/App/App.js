@@ -104,6 +104,37 @@ function App() {
     setBoard(sudoku);
   }
 
+  function compareBoard(current, solved) {
+    let res = {
+      isComplete: true,
+      isSolvable: true,
+    };
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (current[i][j] != solved[i][j]) {
+          if (current[i][j] != -1) {
+            res.isSolvable = false;
+          }
+          res.isComplete = false;
+        }
+      }
+    }
+    return res;
+  }
+
+  function checkGame() {
+    let sudoku = makeDeepCopy(initial);
+    solver(sudoku);
+    let compare = compareBoard(sudoBoard, sudoku);
+    if (compare.isComplete) {
+      alert("You solved it!!!");
+    } else if (compare.isSolvable) {
+      alert("You can do it! Keep going!");
+    } else {
+      alert("Something isnt correct...");
+    }
+  }
+
   function newGame() {
     let sudoku = makeDeepCopy(initial);
     setBoard(sudoku);
@@ -159,7 +190,7 @@ function App() {
         </tbody>
       </table>
       <div className="button__container">
-        <button className="button" onClick={pauseGame}>
+        <button className="button" onClick={checkGame}>
           Pause
         </button>
         <button className="button" onClick={solveBoard}>
