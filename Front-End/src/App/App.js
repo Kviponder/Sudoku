@@ -1,4 +1,5 @@
 import Board from "../Board/Board";
+import boards from "../utils/consts";
 import "./App.css";
 import { useState, useEffect } from "react";
 
@@ -15,12 +16,18 @@ function App() {
     [-1, -1, -1, -1, 3, -1, -1, 7, -1],
   ];
 
-  const [sudoBoard, setBoard] = useState(makeDeepCopy(initial));
+  const [sudoBoard, setBoard] = useState(
+    makeDeepCopy(boards[getRandomInt(boards.length)])
+  );
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(true);
 
   function makeDeepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
+  }
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }
 
   function onInputChange(e, row, col) {
@@ -137,7 +144,7 @@ function App() {
   }
 
   function newGame() {
-    let sudoku = makeDeepCopy(initial);
+    let sudoku = makeDeepCopy(boards[getRandomInt(boards.length)]);
     setBoard(sudoku);
   }
 
@@ -168,11 +175,11 @@ function App() {
       </header>
       <Board sudoBoard={sudoBoard} onInputChange={onInputChange} />
       <div className="button__container">
-        <button className="button" onClick={checkGame}>
+        <button className="button" onClick={pauseGame}>
           Pause
         </button>
         <button className="button" onClick={solveBoard}>
-          Solve
+          Check
         </button>
         <button className="button" onClick={newGame}>
           New
