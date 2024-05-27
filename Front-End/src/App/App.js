@@ -131,7 +131,7 @@ function App() {
   }
 
   function checkGame() {
-    let sudoku = makeDeepCopy(initial);
+    let sudoku = makeDeepCopy(sudoBoard);
     solver(sudoku);
     let compare = compareBoard(sudoBoard, sudoku);
     if (compare.isComplete) {
