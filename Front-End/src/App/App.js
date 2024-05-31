@@ -4,17 +4,17 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const initial = [
-    [-1, 5, -1, 9, -1, -1, -1, -1, -1],
-    [8, -1, -1, -1, 4, -1, 3, -1, 7],
-    [-1, -1, -1, 2, 8, -1, 1, 9, -1],
-    [5, 3, 8, 6, -1, 7, 9, 4, -1],
-    [-1, 2, -1, 3, -1, 1, -1, -1, -1],
-    [1, -1, 9, 8, -1, 4, 6, 2, 3],
-    [9, -1, 7, 4, -1, -1, -1, -1, -1],
-    [-1, 4, 5, -1, -1, -1, 2, -1, 9],
-    [-1, -1, -1, -1, 3, -1, -1, 7, -1],
-  ];
+  // const initial = [
+  //   [-1, 5, -1, 9, -1, -1, -1, -1, -1],
+  //   [8, -1, -1, -1, 4, -1, 3, -1, 7],
+  //   [-1, -1, -1, 2, 8, -1, 1, 9, -1],
+  //   [5, 3, 8, 6, -1, 7, 9, 4, -1],
+  //   [-1, 2, -1, 3, -1, 1, -1, -1, -1],
+  //   [1, -1, 9, 8, -1, 4, 6, 2, 3],
+  //   [9, -1, 7, 4, -1, -1, -1, -1, -1],
+  //   [-1, 4, 5, -1, -1, -1, 2, -1, 9],
+  //   [-1, -1, -1, -1, 3, -1, -1, 7, -1],
+  // ];
 
   const [sudoBoard, setBoard] = useState(
     makeDeepCopy(boards[getRandomInt(boards.length)])
@@ -107,7 +107,7 @@ function App() {
   }
 
   function solveBoard() {
-    let sudoku = makeDeepCopy(initial);
+    let sudoku = makeDeepCopy(sudoBoard);
     solver(sudoku);
     setBoard(sudoku);
   }
@@ -178,7 +178,7 @@ function App() {
         <button className="button" onClick={pauseGame}>
           Pause
         </button>
-        <button className="button" onClick={solveBoard}>
+        <button className="button" onClick={checkGame}>
           Check
         </button>
         <button className="button" onClick={newGame}>
