@@ -68,14 +68,11 @@ function App() {
   }
 
   function checkValid(grid, row, col, num) {
-    if (
+    return (
       checkRow(grid, row, num) &&
       checkCol(grid, col, num) &&
       checkBox(grid, row, col, num)
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
   function getNext(row, col) {
@@ -89,6 +86,7 @@ function App() {
         let [newRow, newCol] = getNext(row, col);
         return solver(grid, newRow, newCol);
       }
+      return true;
     }
     for (let num = 1; num <= 9; num++) {
       if (checkValid(grid, row, col, num)) {
