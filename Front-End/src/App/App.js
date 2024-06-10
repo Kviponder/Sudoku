@@ -64,7 +64,7 @@ function App() {
         boxArr.push(grid[rowStart + i][colStart + j]);
       }
     }
-    return boxArr.indexOf(num === -1);
+    return boxArr.indexOf(num) === -1;
   }
 
   function checkValid(grid, row, col, num) {
@@ -110,6 +110,7 @@ function App() {
     let sudoku = makeDeepCopy(sudoBoard);
     solver(sudoku);
     setBoard(sudoku);
+    console.log("dsadas");
   }
 
   function compareBoard(current, solved) {
@@ -175,7 +176,7 @@ function App() {
       </header>
       <Board sudoBoard={sudoBoard} onInputChange={onInputChange} />
       <div className="button__container">
-        <button className="button" onClick={pauseGame}>
+        <button className="button" onClick={solveBoard}>
           Pause
         </button>
         <button className="button" onClick={checkGame}>
